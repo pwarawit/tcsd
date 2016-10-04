@@ -1,6 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# Usage example:
+# python search.py --q='<query>'
+
 import sys
+import json
 
 from apiclient.discovery import build
 from apiclient.errors import HttpError
@@ -47,11 +52,13 @@ def youtube_search(options):
   #print "Videos:\n", "\n".join(videos), "\n"
   #print "Channels:\n", "\n".join(channels), "\n"
   #print "Playlists:\n", "\n".join(playlists), "\n"
-  print videos
+  #print videos
+  with open('..\\data\\yt_search\\'+ options.q +'.json','w') as outfile:
+	json.dump(search_response, outfile)
 
 
 if __name__ == "__main__":
-  argparser.add_argument("--q", help="Search term", default="InfoMobius")
+  argparser.add_argument("--q", help="Search term", default="Google")
   argparser.add_argument("--max-results", help="Max results", default=25)
   args = argparser.parse_args()
 

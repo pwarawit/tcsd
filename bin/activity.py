@@ -2,40 +2,38 @@
 # -*- coding: utf-8 -*-
 
 # Usage example:
-# python channel.py --channel_id='<channel_id>'
+# python activity.py --channel_id='<channel_id>'
 
-import httplib2
-import os
 import sys
 import json
 
 from apiclient.discovery import build
 from apiclient.errors import HttpError
-from oauth2client.client import flow_from_clientsecrets
-from oauth2client.file import Storage
-from oauth2client.tools import argparser, run_flow
+from oauth2client.tools import argparser
 
-# DEVELOPER_KEY = "AIzaSyBRM1lDMkC8u_UsMOIM9j0Df0B9oC9rPKU" # (TCSD2Social)
+
+# Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
+# tab of
+#   https://cloud.google.com/console
+# Please ensure that you have enabled the YouTube Data API for your project.
 DEVELOPER_KEY = "AIzaSyArZEg4nMfnWbmtP-_Hxd7LWHsRK29QRWE"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
-# Call the API's channels.list method to retrieve an existing channel data.
+# Call the API's activities.list method to retrieve an existing channel data.
 # This method will write to the ..\data\yt_channel\ folder with json file.
-def get_channel_list(youtube, channel_id):
-  results = youtube.channels().list(
-    part="contentDetails, contentOwnerDetails, localizations, snippet, statistics, status, topicDetails",
-    id=channel_id
+def get_activity_list(youtube, channel_id):
+  results = youtube.activities().list(
+    part="id, snippet, contentDetails",
+    channelId=channel_id
   ).execute()
   
-  with open('..\\data\\yt_channel\\'+ channel_id +'.json','w') as outfile:
+  with open('..\\data\\yt_activity\\'+ channel_id +'.json','w') as outfile:
 	json.dump(results, outfile)
-	
 
 if __name__ == "__main__":
   # The "channel_id" option specifies the ID of the selected YouTube channel.
   argparser.add_argument("--channel_id", help="ID for channel for which the localization will be applied.")
-	
   args = argparser.parse_args()
 
   if not args.channel_id:
@@ -44,7 +42,7 @@ if __name__ == "__main__":
   youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
   
   try:
-	get_channel_list(youtube, args.channel_id)
+	get_activity_list(youtube, args.channel_id)
   except HttpError, e:
     print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
   else:
