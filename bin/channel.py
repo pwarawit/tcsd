@@ -1,7 +1,8 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # Usage example:
-# python channel_list.py --channel_id='<channel_id>'
+# python channel.py --channel_id='<channel_id>'
 
 import httplib2
 import os
