@@ -29,7 +29,7 @@ def get_commentthreads(youtube, video_id):
 	textFormat="plainText"
   ).execute()
   
-  with open('..\\data\\yt_commentthreads_video\\'+ video_id +'.json','w') as outfile:
+  with open('c:\\tcsd\\data\\yt_commentthreads_video\\'+ video_id +'.json','w') as outfile:
 	json.dump(results, outfile)
 
 if __name__ == "__main__":

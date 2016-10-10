@@ -53,7 +53,7 @@ def youtube_search(options):
   #print "Channels:\n", "\n".join(channels), "\n"
   #print "Playlists:\n", "\n".join(playlists), "\n"
   #print videos
-  with open('..\\data\\yt_search\\'+ options.q +'.json','w') as outfile:
+  with open('c:\\tcsd\\data\\yt_search\\'+ options.q +'.json','w') as outfile:
 	json.dump(search_response, outfile)
 
 

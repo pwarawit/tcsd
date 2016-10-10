@@ -28,7 +28,7 @@ def get_subscription_list(youtube, channel_id):
     channelId=channel_id
   ).execute()
   
-  with open('..\\data\\yt_subscription\\'+ channel_id +'.json','w') as outfile:
+  with open('c:\\tcsd\\data\\yt_subscription\\'+ channel_id +'.json','w') as outfile:
 	json.dump(results, outfile)
 	
 

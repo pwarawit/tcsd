@@ -28,7 +28,7 @@ def get_video(youtube, video_id):
 	id=video_id
   ).execute()
   
-  with open('..\\data\\yt_video\\'+ video_id +'.json','w') as outfile:
+  with open('c:\\tcsd\\data\\yt_video\\'+ video_id +'.json','w') as outfile:
 	json.dump(results, outfile)
 
 if __name__ == "__main__":
