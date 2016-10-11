@@ -25,7 +25,8 @@ YOUTUBE_API_VERSION = "v3"
 def get_channel_list(youtube, channel_id):
   results = youtube.channels().list(
     part="contentDetails, contentOwnerDetails, localizations, snippet, statistics, status, topicDetails",
-    id=channel_id
+    id=channel_id,
+	maxResults=50
   ).execute()
   
   with open('c:\\tcsd\\data\\yt_channel\\'+ channel_id +'.json','w') as outfile:

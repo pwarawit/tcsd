@@ -25,7 +25,8 @@ YOUTUBE_API_VERSION = "v3"
 def get_video(youtube, video_id):
   results = youtube.videos().list(
     part="contentDetails, id, localizations, player, snippet, statistics, status, topicDetails",
-	id=video_id
+	id=video_id,
+	maxResults=50
   ).execute()
   
   with open('c:\\tcsd\\data\\yt_video\\'+ video_id +'.json','w') as outfile:

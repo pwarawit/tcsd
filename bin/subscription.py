@@ -25,7 +25,8 @@ YOUTUBE_API_VERSION = "v3"
 def get_subscription_list(youtube, channel_id):
   results = youtube.subscriptions().list(
     part="contentDetails, id, snippet, subscriberSnippet",
-    channelId=channel_id
+    channelId=channel_id,
+	maxResults=50
   ).execute()
   
   with open('c:\\tcsd\\data\\yt_subscription\\'+ channel_id +'.json','w') as outfile:

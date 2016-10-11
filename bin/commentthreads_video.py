@@ -26,7 +26,8 @@ def get_commentthreads(youtube, video_id):
   results = youtube.commentThreads().list(
     part="id, snippet, replies",
     videoId=video_id,
-	textFormat="plainText"
+	textFormat="plainText",
+	maxResults=100
   ).execute()
   
   with open('c:\\tcsd\\data\\yt_commentthreads_video\\'+ video_id +'.json','w') as outfile:

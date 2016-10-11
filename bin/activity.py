@@ -25,7 +25,8 @@ YOUTUBE_API_VERSION = "v3"
 def get_activity_list(youtube, channel_id):
   results = youtube.activities().list(
     part="id, snippet, contentDetails",
-    channelId=channel_id
+    channelId=channel_id,
+	maxResults=50
   ).execute()
   
   with open('c:\\tcsd\\data\\yt_activity\\'+ channel_id +'.json','w') as outfile:
