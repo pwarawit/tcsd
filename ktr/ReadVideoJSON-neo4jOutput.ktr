@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ReadVideoJSON</name>
+    <name>ReadVideoJSON-neo4jOutput</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -101,10 +101,9 @@
   </connection>
   <order>
   <hop> <from>Get Video JSON Files</from><to>Video JSON Input</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calculator</from><to>Formula</to><enabled>Y</enabled> </hop>
-  <hop> <from>Formula</from><to>Execute row SQL script</to><enabled>Y</enabled> </hop>
-  <hop> <from>Video JSON Input</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
-  <hop> <from>Modified Java Script Value</from><to>Calculator</to><enabled>Y</enabled> </hop>
+  <hop> <from>Video JSON Input</from><to>Calculator</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Neo4J Output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Calculator</name>
@@ -133,8 +132,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>192</yloc>
+      <xloc>496</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -399,8 +398,8 @@
     </step>
 
   <step>
-    <name>Execute row SQL script</name>
-    <type>ExecSQLRow</type>
+    <name>Select values</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -409,52 +408,149 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <commit>1</commit>
-    <connection>neo4j</connection>
-    <sql_field>MergeScript</sql_field>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <sqlFromfile>N</sqlFromfile>
-    <sendOneStatement>Y</sendOneStatement>
-     <cluster_schema/>
+    <fields>      <field>        <name>id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>title</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>description</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>channelId</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>publishedAt</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>channelTitle</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>thumbnails_url</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>duration</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>commentCount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>viewCount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>favoriteCount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>dislikeCount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>likeCount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>NodeLable</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+      <meta>        <name>commentCount</name>
+        <rename>commentCount</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>viewCount</name>
+        <rename>viewCount</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>favoriteCount</name>
+        <rename>favoriteCount</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>dislikeCount</name>
+        <rename>dislikeCount</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>likeCount</name>
+        <rename>likeCount</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>176</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Formula</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>MergeScript</field_name>
-<formula_string>&#x22;MERGE &#x28;a1&#x3a;Video &#x7b;id&#x3a; &#x22;&#x22;&#x22;&#x26;&#x5b;id&#x5d;&#x26;&#x22;&#x22;&#x22;, title&#x3a;&#x22;&#x22;&#x22;&#x26;&#x5b;newTitle&#x5d;&#x26;&#x22;&#x22;&#x22;, description&#x3a; &#x22;&#x22;&#x22;&#x26;&#x5b;newDescription&#x5d;&#x26;&#x22;&#x22;&#x22;, publishedAt&#x3a; &#x22;&#x22;&#x22;&#x26;&#x5b;publishedAt&#x5d;&#x26;&#x22;&#x22;&#x22; , thumbnails_url&#x3a; &#x22;&#x22;&#x22;&#x26;&#x5b;thumbnails_url&#x5d;&#x26;&#x22;&#x22;&#x22;, duration&#x3a; &#x22;&#x22;&#x22;&#x26;&#x5b;duration&#x5d;&#x26;&#x22;&#x22;&#x22;, commentCount&#x3a; &#x22;&#x26;&#x5b;commentCount&#x5d;&#x26;&#x22;&#x7d;&#x29;&#x3b;&#x22;</formula_string>
-<value_type>String</value_type>
-<value_length>50000</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>176</xloc>
+      <xloc>496</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Modified Java Script Value</name>
-    <type>ScriptValueMod</type>
+    <name>Neo4J Output</name>
+    <type>Neo4JOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -463,27 +559,69 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;&#xd;&#xa;var newDescription &#x3d; replace&#x28;replace&#x28;description, &#x22;&#x5b;&#x5c;n&#x5c;r&#x5d;&#x22;, &#x22; &#x22;&#x29;,&#x22;&#x5c;&#x22;&#x22;,&#x22; &#x22;&#x29;&#x3b;&#xd;&#xa;var newTitle &#x3d; replace&#x28;title, &#x22;&#x5c;&#x22;&#x22;, &#x22; &#x22;&#x29;&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>newDescription</name>
-        <rename>newDescription</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>newTitle</name>
-        <rename>newTitle</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
+<protocol>http</protocol>
+<host>localhost</host>
+<port>7474</port>
+<username>neo4j</username>
+<password>tcsd</password>
+<key>id</key>
+<labels>
+    <label>NodeLable</label>
+</labels>
+<nodes>
+    <node>id</node>
+    <node>title</node>
+    <node>description</node>
+    <node>publishedAt</node>
+    <node>thumbnails_url</node>
+</nodes>
+<relationships>
+</relationships>
+<relprops>
+</relprops>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>96</yloc>
+      <xloc>368</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Neo4J Output 2</name>
+    <type>Neo4JOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<protocol>http</protocol>
+<host>localhost</host>
+<port>7474</port>
+<username>neo4j</username>
+<password>tcsd</password>
+<key>id</key>
+<labels>
+    <label>NodeLable</label>
+</labels>
+<nodes>
+    <node>id</node>
+    <node>title</node>
+    <node>description</node>
+    <node>publishedAt</node>
+    <node>thumbnails_url</node>
+</nodes>
+<relationships>
+</relationships>
+<relprops>
+</relprops>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>144</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
